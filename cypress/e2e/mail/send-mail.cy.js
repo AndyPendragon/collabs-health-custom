@@ -74,8 +74,9 @@ describe("Send health mail", () => {
     cy.get("#compose-subject").should('be.visible').type(subject);
     cy.get("#composebody").should('be.visible').type(subject);
     cy.get("#rcmbtn112").click();
-
+    
     cy.visit(`${Cypress.env("mailUrl")}/?_task=mail&_mbox=Sent`);
+    cy.wait(12000); // Wait for 5 seconds
     cy.get('tr[id^="rcmrow"]').should("be.visible");
     cy.checkSubjectInMessages(subject, 5, true);
   });
